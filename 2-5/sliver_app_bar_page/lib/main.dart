@@ -38,129 +38,120 @@ class _SliverAppBarPageState extends State<SliverAppBarPage> {
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return MediaQuery(
-        data: MediaQuery.of(context).copyWith(textScaleFactor: _textScale),
-        child: Scaffold(
-          body: CustomScrollView(
-            slivers: [
-              SliverAppBar(
-                backgroundColor: Colors.blueAccent.withOpacity(0.3),
-                floating: true,
-                pinned: true,
-                snap: false,
-                expandedHeight: 180,
-                toolbarHeight: 60,
-                flexibleSpace: FlexibleSpaceBar(
-                  title: Text("記事カテゴリー"),
-                  background: Stack(
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        child: Image.network("https://picsum.photos/650/940",
-                            fit: BoxFit.cover),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                              begin: FractionalOffset.topCenter,
-                              end: FractionalOffset.bottomCenter,
-                              stops: [
-                                0.5,
-                                1
-                              ],
-                              colors: [
-                                Colors.grey.withOpacity(0),
-                                Colors.black38
-                              ]),
-                        ),
-                      )
-                    ],
-                  ),
+  Widget _createSliverAppBar() {
+    return SliverAppBar(
+      backgroundColor: Colors.blueAccent.withOpacity(0.3),
+      floating: true,
+      pinned: true,
+      snap: false,
+      expandedHeight: 180,
+      toolbarHeight: 60,
+      flexibleSpace: FlexibleSpaceBar(
+        title: Text("記事カテゴリー"),
+        background: Stack(
+          children: [
+            Container(
+              width: double.infinity,
+              child: Image.network(
+                "https://picsum.photos/650/940",
+                fit: BoxFit.cover,
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: FractionalOffset.topCenter,
+                  end: FractionalOffset.bottomCenter,
+                  stops: [0.5, 1],
+                  colors: [
+                    Colors.grey.withOpacity(0),
+                    Colors.black38,
+                  ],
                 ),
               ),
-              SliverList(
-                delegate: SliverChildListDelegate(
-                  <Widget>[
-                    Container(
-                      color: Colors.grey[200],
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                            left: 20, right: 20, bottom: 20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Text("文字を大きく"),
-                                Switch(
-                                    value: _isLarge,
-                                    onChanged: _toggleLargeFont),
-                              ],
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    'Sept. 29 2021',
-                                    style: GoogleFonts.lato(),
-                                  ),
-                                ),
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.share,
-                                    color: Colors.blueAccent,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Text('記事タイトル記事タイトル記事タイトル記事タイトル記事タイトル記事タイトル'),
-                            Divider(
-                              height: 30,
-                              thickness: 1,
-                            ),
-                            SizedBox(
-                              height: 8.0,
-                            ),
-                            Row(
-                              children: [
-                                CircleAvatar(
-                                  backgroundImage: NetworkImage(
-                                      "https://picsum.photos/650/940"),
-                                  radius: 26,
-                                  backgroundColor: Colors.grey[200],
-                                ),
-                                SizedBox(width: 10),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text("山田太郎"),
-                                    Text("ITジャーナリスト"),
-                                  ],
-                                ),
-                                Spacer(),
-                                Icon(
-                                  Icons.favorite_border,
-                                  color: Colors.blueAccent,
-                                ),
-                                SizedBox(width: 5.0),
-                                Text('350'),
-                                SizedBox(width: 16.0),
-                                Icon(
-                                  Icons.comment,
-                                  color: Colors.blueAccent,
-                                ),
-                                SizedBox(width: 5.0),
-                                Text('25'),
-                              ],
-                            ),
-                            SizedBox(height: 10),
-                            SizedBox(height: 10),
-                            Text("""
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _createSliverListBody() {
+    Widget sliverSwitchWidget = Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Text("文字を大きく"),
+        Switch(value: _isLarge, onChanged: _toggleLargeFont),
+      ],
+    );
+
+    Widget sliverSubInfoWidget = Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Expanded(
+          child: Text(
+            'Sept. 29 2021',
+            style: GoogleFonts.lato(),
+          ),
+        ),
+        IconButton(
+          onPressed: () {},
+          icon: Icon(
+            Icons.share,
+            color: Colors.blueAccent,
+          ),
+        ),
+      ],
+    );
+
+    Widget UserInfoWidget = Row(
+      children: [
+        CircleAvatar(
+          backgroundImage: NetworkImage("https://picsum.photos/650/940"),
+          radius: 26,
+          backgroundColor: Colors.grey[200],
+        ),
+        SizedBox(width: 10),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("山田太郎"),
+            Text("ITジャーナリスト"),
+          ],
+        ),
+        Spacer(),
+        Icon(
+          Icons.favorite_border,
+          color: Colors.blueAccent,
+        ),
+        SizedBox(width: 5.0),
+        Text('350'),
+        SizedBox(width: 16.0),
+        Icon(
+          Icons.comment,
+          color: Colors.blueAccent,
+        ),
+        SizedBox(width: 5.0),
+        Text('25'),
+      ],
+    );
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        sliverSwitchWidget,
+        sliverSubInfoWidget,
+        Text('記事タイトル記事タイトル記事タイトル記事タイトル記事タイトル記事タイトル'),
+        Divider(
+          height: 30,
+          thickness: 1,
+        ),
+        SizedBox(
+          height: 8.0,
+        ),
+        UserInfoWidget,
+        SizedBox(height: 20),
+        Text("""
 新聞記事には六つの要素が含まれており、それを5W1Hと呼びます。
 いつ（WHEN）、どこで（WHERE）、だれが（WHO）、何を（WHAT）、なぜ（WHY）、どのように（HOW）――がそろっていれば、過不足のない記事といえます。
 もうひとつの新聞記事の特徴は、「逆三角形」で作られていることです。
@@ -175,13 +166,35 @@ class _SliverAppBarPageState extends State<SliverAppBarPage> {
 思わずひざをたたくようなうまい見出しは、新聞の魅力のひとつでしょう。
 リードは本文を簡潔にまとめたもので、数行のなかに本文のエッセンスが込められています。
 """)
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+      ],
+    );
+  }
+
+  Widget _createSliverList() {
+    return SliverList(
+      delegate: SliverChildListDelegate(
+        [
+          Container(
+            color: Colors.grey[200],
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+              child: _createSliverListBody(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MediaQuery(
+        data: MediaQuery.of(context).copyWith(textScaleFactor: _textScale),
+        child: Scaffold(
+          body: CustomScrollView(
+            slivers: [
+              _createSliverAppBar(),
+              _createSliverList(),
             ],
           ),
         ));
