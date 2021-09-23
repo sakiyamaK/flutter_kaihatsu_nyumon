@@ -87,13 +87,13 @@ class _SliverAppBarPageState extends State<SliverAppBarPage> {
 
     Widget sliverSubInfoWidget = Row(
       crossAxisAlignment: CrossAxisAlignment.center,
+      // mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Expanded(
-          child: Text(
-            'Sept. 29 2021',
-            style: GoogleFonts.lato(),
-          ),
+        Text(
+          'Sept. 29 2021',
+          style: GoogleFonts.lato(),
         ),
+        const Spacer(),
         IconButton(
           onPressed: () {},
           icon: Icon(
@@ -104,35 +104,53 @@ class _SliverAppBarPageState extends State<SliverAppBarPage> {
       ],
     );
 
-    Widget UserInfoWidget = Row(
+    Widget userInfoWidget = Row(
       children: [
         CircleAvatar(
-          backgroundImage: NetworkImage("https://picsum.photos/650/940"),
-          radius: 26,
-          backgroundColor: Colors.grey[200],
+          backgroundColor: Colors.red,
+          radius: 28,
+          child: CircleAvatar(
+            backgroundImage:
+                const NetworkImage("https://picsum.photos/650/940"),
+            radius: 26,
+            backgroundColor: Colors.grey[200],
+          ),
         ),
-        SizedBox(width: 10),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("山田太郎"),
-            Text("ITジャーナリスト"),
-          ],
+        const SizedBox(width: 10),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: const [
+              Text("山田太郎"),
+              Text(
+                "ITジャーナリストだよおおおおおん",
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
         ),
-        Spacer(),
-        Icon(
+        const SizedBox(
+          width: 10.0,
+        ),
+        const Icon(
           Icons.favorite_border,
           color: Colors.blueAccent,
         ),
-        SizedBox(width: 5.0),
-        Text('350'),
-        SizedBox(width: 16.0),
-        Icon(
+        const SizedBox(
+          width: 5.0,
+        ),
+        const Text('350'),
+        const SizedBox(
+          width: 16.0,
+        ),
+        const Icon(
           Icons.comment,
           color: Colors.blueAccent,
         ),
-        SizedBox(width: 5.0),
-        Text('25'),
+        const SizedBox(
+          width: 5.0,
+        ),
+        const Text('25'),
       ],
     );
 
@@ -145,11 +163,9 @@ class _SliverAppBarPageState extends State<SliverAppBarPage> {
         Divider(
           height: 30,
           thickness: 1,
+          color: Colors.blueAccent,
         ),
-        SizedBox(
-          height: 8.0,
-        ),
-        UserInfoWidget,
+        userInfoWidget,
         SizedBox(height: 20),
         Text("""
 新聞記事には六つの要素が含まれており、それを5W1Hと呼びます。
