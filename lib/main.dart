@@ -3,6 +3,8 @@ import 'page/sliver_app_bar_page.dart';
 import 'page/responsive_design_page.dart';
 import 'page/grid_view_page.dart';
 import 'page/shrinkable_footer_page.dart';
+import 'page/hero_page.dart';
+import 'page/transition_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -73,6 +75,28 @@ class NavigationPage extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => ResponsiveDesignPage(),
+                  ),
+                );
+              },
+            ),
+            ElevatedButton(
+              child: Text('3-3 HeroPage'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HeroFromPage(),
+                  ),
+                );
+              },
+            ),
+            ElevatedButton(
+              child: Text('3-4 TransitionPage'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => TransitionPage(),
                   ),
                 );
               },
